@@ -11,6 +11,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import root_mean_squared_error
+from sklearn.preprocessing import StandardScaler
+import joblib
 
 # -------------------------------
 # 2. Load Datasets
@@ -104,17 +106,21 @@ y = df['Power_Load_kw']   # target column from power dataset
 # 8. Train/Test Split
 # -------------------------------
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, shuffle=False)
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
 
 # -------------------------------
 # 9. Model Training
 # -------------------------------
 model = RandomForestRegressor(n_estimators=100, random_state=42)
-model.fit(X_train, y_train)
+model.fit(X_train_scaled, y_train)
 
 # -------------------------------
 # 10. Predictions
 # -------------------------------
-y_pred = model.predict(X_test)
+y_pred = model.predict(X_test_scaled)
 
 # -------------------------------
 # 11. Evaluation
@@ -145,6 +151,7 @@ print("Predicted Peak Demand:", y_pred[peak_index])
 
 
 
-import joblib
+
 # Save the model to a file
 joblib.dump(model, 'peak_load_model.pkl')
+joblib.dump(scaler, 'scaler.pkl')
