@@ -11,7 +11,7 @@ st.set_page_config(
 )
 
 #load trained objects
-model = joblib.load("logistic_model.pkl")
+model = joblib.load("peak_load_model.pkl")
 scaler = joblib.load("scaler.pkl")
 
 st.title("Peak Load Prediction")

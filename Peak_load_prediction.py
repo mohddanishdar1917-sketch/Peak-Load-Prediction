@@ -142,3 +142,9 @@ actual_test_row_index = len(X_train) + peak_index  # Get the actual index in the
 predicted_timestamp = df.iloc[actual_test_row_index]['datetime']
 print("Predicted Peak Load Time:", predicted_timestamp)
 print("Predicted Peak Demand:", y_pred[peak_index])
+
+
+
+import joblib
+# Save the model to a file
+joblib.dump(model, 'peak_load_model.pkl')
