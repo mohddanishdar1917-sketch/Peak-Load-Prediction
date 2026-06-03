@@ -50,7 +50,7 @@ st.markdown("""
 
 st.title("⚡ Peak Load Prediction Dashboard")
 st.markdown(
-    "### Accurate Forecasting Improves Energy Management"
+    "### AI Powered Peak Load Forecasting for Smart Energy Management"
 )
 
 st.markdown("---")
@@ -114,7 +114,7 @@ rmse = np.sqrt(
 # SIDEBAR INPUTS
 # ==========================================
 
-st.sidebar.header("⚙️ Input Parameters")
+st.sidebar.header(" Input Parameters")
 
 temperature = st.sidebar.slider(
     "Temperature (°C)",
@@ -180,7 +180,7 @@ st.markdown("---")
 # PREDICTION SECTION
 # ==========================================
 
-st.subheader("🔮 Forecast Simulation")
+st.subheader("Forecast Simulation")
 
 input_data = pd.DataFrame({
     "Temperature": [temperature],
@@ -189,7 +189,7 @@ input_data = pd.DataFrame({
     "Holiday_Flag": [holiday_flag]
 })
 
-if st.button("🚀 Predict Peak Load"):
+if st.button("Load Prediction"):
 
     predicted_load = model.predict(input_data)[0]
 
