@@ -50,7 +50,7 @@ st.markdown("""
 
 st.title("⚡ Peak Load Prediction Dashboard")
 st.markdown(
-    "### AI Powered Peak Load Forecasting for Smart Energy Management"
+    "### AI Powered App for Peak Electricity Prediction"
 )
 
 st.markdown("---")
@@ -119,22 +119,22 @@ st.sidebar.header(" Input Parameters")
 temperature = st.sidebar.slider(
     "Temperature (°C)",
     0,
-    40,
-    25
+    55,
+    0
 )
 
 humidity = st.sidebar.slider(
     "Humidity (%)",
     20,
     100,
-    60
+    0
 )
 
 wind_speed = st.sidebar.slider(
     "Wind Speed (km/h)",
     0,
     25,
-    10
+    0
 )
 
 holiday_option = st.sidebar.selectbox(
