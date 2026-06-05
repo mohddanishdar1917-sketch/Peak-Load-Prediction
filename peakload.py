@@ -62,7 +62,7 @@ st.subheader("🔍 Feature Importance")
 
 model = joblib.load("peak_load_model.pkl")
 importance = model.feature_importances_
-features = X.columns
+features = ['Temperature','Humidity','Wind_Speed','Holiday_Flag']
 
 fig_imp = px.bar(
     x=features,
