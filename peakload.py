@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
+import matplotlib.pyplot as plt
+import joblib
 
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
@@ -57,6 +59,8 @@ st.markdown(f"🕒 **Current Date & Time:** {current_time}")
 # ==========================================
 st.subheader("🔍 Feature Importance")
 
+
+model = joblib.load("peak_load_model.pkl")
 importance = model.feature_importances_
 features = X.columns
 
@@ -321,6 +325,8 @@ with tab2:
     )
 
 st.markdown("---")
+
+model = joblib.load("peak_load_model.pkl")
 
 # ==========================================
 # FOOTER
