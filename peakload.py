@@ -44,6 +44,32 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+from datetime import datetime
+
+# ==========================================
+# DATE & TIME DISPLAY
+# ==========================================
+current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+st.markdown(f"🕒 **Current Date & Time:** {current_time}")
+
+# ==========================================
+# FEATURE IMPORTANCE
+# ==========================================
+st.subheader("🔍 Feature Importance")
+
+importance = model.feature_importances_
+features = X.columns
+
+fig_imp = px.bar(
+    x=features,
+    y=importance,
+    labels={'x':'Features','y':'Importance'},
+    title="Feature Importance in Prediction"
+)
+
+st.plotly_chart(fig_imp, use_container_width=True)
+
+
 # ==========================================
 # HEADER
 # ==========================================
