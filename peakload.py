@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
+from datetime import datetime
 
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
@@ -215,7 +216,22 @@ if st.button("Load Prediction"):
         )
     )
 
-    st.plotly_chart(
+# Download Result with Date & Time
+current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+result_df = pd.DataFrame({
+    "Predicted_Load_kWh": [predicted_load],
+    "Date_Time": [current_time]
+})
+
+
+st.download_button(
+        label="📥 Download Prediction",
+        data=result_df.to_csv(index=False),
+        file_name="prediction.csv",
+        mime="text/csv"
+    )
+st.plotly_chart(
         gauge,
         use_container_width=True
     )
