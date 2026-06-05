@@ -238,16 +238,16 @@ st.plotly_chart(
 
     # Progress Bar
 
-    percentage = min(
+percentage = min(
         predicted_load / 1000,
         1.0
     )
 
-    st.progress(float(percentage))
+st.progress(float(percentage))
 
     # Download Result
 
-    result_df = pd.DataFrame({
+result_df = pd.DataFrame({
         "Predicted_Load_kWh": [predicted_load]
     })
 
