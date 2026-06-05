@@ -3,8 +3,6 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
-import matplotlib.pyplot as plt
-import joblib
 
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
@@ -45,34 +43,6 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True)
-
-from datetime import datetime
-
-# ==========================================
-# DATE & TIME DISPLAY
-# ==========================================
-current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-st.markdown(f"🕒 **Current Date & Time:** {current_time}")
-
-# ==========================================
-# FEATURE IMPORTANCE
-# ==========================================
-st.subheader("🔍 Feature Importance")
-
-
-model = joblib.load("peak_load_model.pkl")
-importance = model.feature_importances_
-features = ['Temperature','Humidity','Wind_Speed','Holiday_Flag']
-
-fig_imp = px.bar(
-    x=features,
-    y=importance,
-    labels={'x':'Features','y':'Importance'},
-    title="Feature Importance in Prediction"
-)
-
-st.plotly_chart(fig_imp, use_container_width=True)
-
 
 # ==========================================
 # HEADER
@@ -265,7 +235,18 @@ if st.button("Load Prediction"):
         "Predicted_Load_kWh": [predicted_load]
     })
 
-    st.download_button(
+from datetime import datetime  # make sure this import is at the top
+
+# Download Result with Date & Time
+current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+result_df = pd.DataFrame({
+    "Predicted_Load_kWh": [predicted_load],
+    "Date_Time": [current_time]
+})
+
+
+st.download_button(
         label="📥 Download Prediction",
         data=result_df.to_csv(index=False),
         file_name="prediction.csv",
@@ -325,8 +306,6 @@ with tab2:
     )
 
 st.markdown("---")
-
-model = joblib.load("peak_load_model.pkl")
 
 # ==========================================
 # FOOTER
